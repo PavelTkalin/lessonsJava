@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 //        task 1
@@ -42,4 +44,124 @@ public class Main {
 
         return true;
     }
+
+
+    //        task 1
+
+    public class CalculationOfArray {
+        public static void main(String[] args) {
+
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Type in the number of elements in this array: ");
+            int n = scanner.nextInt();
+
+            int[] arrayElement = new int[n];
+
+            System.out.println("Enter " + n + " elements:");
+            for (int i = 0; i < n; i++) {
+                System.out.print("Element " + (i + 1) + ": ");
+                arrayElement[i] = scanner.nextInt();
+            }
+
+            int arrayVolume = arrayElement.length;
+
+            System.out.println("The size of the arrayElement is: " + arrayVolume);
+
+            scanner.close();
+        }
+    }
+
+    //        task 2
+
+    public class CalculationOrderArray {
+        public static void main(String[] args) {
+
+            Scanner scanner = new Scanner(System.in);
+
+
+            System.out.print("Type in the number of elements in this arrayElement: ");
+            int n = scanner.nextInt();
+
+
+            int[] arrayElement = new int[n];
+
+
+            System.out.println("Enter " + n + " figures:");
+            for (int i = 0; i < n; i++) {
+                System.out.print("Element " + (i + 1) + ": ");
+                arrayElement[i] = scanner.nextInt();
+            }
+
+
+            int numberEven = 0;
+            int numberOdd = 0;
+
+
+            for (int num : arrayElement) {
+                if (num % 2 == 0) {
+                    numberEven++;
+                } else {
+                    numberOdd++;
+                }
+            }
+
+
+            System.out.println("Number of even elements: " + numberEven);
+            System.out.println("Number of odd elements: " + numberOdd);
+
+
+            scanner.close();
+        }
+    }
+
+    //        task 3
+
+    public class SearchWithinArray {
+        public static void main(String[] args) {
+
+            Scanner scanner = new Scanner(System.in);
+
+
+            System.out.print("Enter the number of elements in the array: ");
+            int n = scanner.nextInt();
+
+
+            int[] arrayElement = new int[n];
+
+
+            System.out.println("Enter " + n + " integers:");
+            for (int i = 0; i < n; i++) {
+                System.out.print("Element " + (i + 1) + ": ");
+                array[i] = scanner.nextInt();
+            }
+
+
+            System.out.print("Enter the number to search for: ");
+            int searchNumber = scanner.nextInt();
+
+
+            boolean found = false;
+            for (int num : array) {
+                if (num == searchNumber) {
+                    found = true;
+                    break;
+                }
+            }
+
+
+            if (found) {
+                System.out.println("The number " + searchNumber + " is in the array.");
+            } else {
+                System.out.println("The number " + searchNumber + " is not in the array.");
+            }
+
+
+            scanner.close();
+        }
+    }
+
+
+
+
 }
