@@ -1,167 +1,70 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
-//        task 1
-//        int[] nums = {11, 22, 33, 524, 25, 236, 123, 12132, 234, 234};
-//        int result = getMaxNum(nums);
-//        System.out.println(result);
 
+    // Task 1
+    public static int[] numberOfElementsArray() {
+        Scanner scanner = new Scanner(System.in);
 
-//        task 2
-//        getSimpleNums(20);
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
 
-    }
+        int[] array = new int[n];
 
-    public static int getMaxNum(int[] nums) {
-        int max = nums[0];
-
-        for (int i = 1; i < nums.length; ++i) {
-            int numberToCheck = nums[i];
-
-            if (numberToCheck > max) {
-                max = numberToCheck;
-            }
+        System.out.println("Enter " + n + " integers:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Element " + (i + 1) + ": ");
+            array[i] = scanner.nextInt();
         }
 
-        return max;
+
+        return array;
     }
 
-    public static void getSimpleNums(int limit) {
-        for (int i = 2; i < limit; ++i) {
-            if (isNumSimple(i)) {
-                System.out.println(i);
-            }
-        }
-    }
+    // 2. Task 2
+    public static void arrayEvenOddCounting(int[] array) {
+        int evenNumber = 0;
+        int oddNumber = 0;
 
-    public static boolean isNumSimple(int num) {
-        for (int i = 2; i < num / 2; ++i) {
-            if (num % i == 0) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-
-    //        task 1
-
-    public class CalculationOfArray {
-        public static void main(String[] args) {
-
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.print("Type in the number of elements in this array: ");
-            int n = scanner.nextInt();
-
-            int[] arrayElement = new int[n];
-
-            System.out.println("Enter " + n + " elements:");
-            for (int i = 0; i < n; i++) {
-                System.out.print("Element " + (i + 1) + ": ");
-                arrayElement[i] = scanner.nextInt();
-            }
-
-            int arrayVolume = arrayElement.length;
-
-            System.out.println("The size of the arrayElement is: " + arrayVolume);
-
-            scanner.close();
-        }
-    }
-
-    //        task 2
-
-    public class CalculationOrderArray {
-        public static void main(String[] args) {
-
-            Scanner scanner = new Scanner(System.in);
-
-
-            System.out.print("Type in the number of elements in this arrayElement: ");
-            int n = scanner.nextInt();
-
-
-            int[] arrayElement = new int[n];
-
-
-            System.out.println("Enter " + n + " figures:");
-            for (int i = 0; i < n; i++) {
-                System.out.print("Element " + (i + 1) + ": ");
-                arrayElement[i] = scanner.nextInt();
-            }
-
-
-            int numberEven = 0;
-            int numberOdd = 0;
-
-
-            for (int num : arrayElement) {
-                if (num % 2 == 0) {
-                    numberEven++;
-                } else {
-                    numberOdd++;
-                }
-            }
-
-
-            System.out.println("Number of even elements: " + numberEven);
-            System.out.println("Number of odd elements: " + numberOdd);
-
-
-            scanner.close();
-        }
-    }
-
-    //        task 3
-
-    public class SearchWithinArray {
-        public static void main(String[] args) {
-
-            Scanner scanner = new Scanner(System.in);
-
-
-            System.out.print("Enter the number of elements in the array: ");
-            int n = scanner.nextInt();
-
-
-            int[] arrayElement = new int[n];
-
-
-            System.out.println("Enter " + n + " integers:");
-            for (int i = 0; i < n; i++) {
-                System.out.print("Element " + (i + 1) + ": ");
-                array[i] = scanner.nextInt();
-            }
-
-
-            System.out.print("Enter the number to search for: ");
-            int searchNumber = scanner.nextInt();
-
-
-            boolean found = false;
-            for (int num : array) {
-                if (num == searchNumber) {
-                    found = true;
-                    break;
-                }
-            }
-
-
-            if (found) {
-                System.out.println("The number " + searchNumber + " is in the array.");
+        for (int num : array) {
+            if (num % 2 == 0) {
+                evenNumber++;
             } else {
-                System.out.println("The number " + searchNumber + " is not in the array.");
+                oddNumber++;
             }
-
-
-            scanner.close();
         }
+
+        System.out.println("Number of even figures: " + evenNumber);
+        System.out.println("Number of odd figures: " + oddNumber);
     }
 
+    // 3. Task 3
+    public static int[] addSizeToArray(int[] array) {
+        int size = array.length;
+
+        int[] newArray = Arrays.copyOf(array, size + 1);
+
+        newArray[size] = size;
+
+        return newArray;
+    }
+
+    public static void main(String[] args) {
 
 
+        // task 1 output
 
+        int[] userArray = numberOfElementsArray();
+
+        int arraySize = userArray.length;
+        System.out.println("The size of the array is: " + arraySize);
+
+        // task 2 output
+        arrayEvenOddCounting(userArray);
+
+        // task 3 output
+        int[] newArray = addSizeToArray(userArray);
+        System.out.println("Array after adding has elements: " + Arrays.toString(newArray));
+    }
 }
