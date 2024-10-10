@@ -2,7 +2,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String result = filterBadWords("Test passed");
+        String result = filterBadWords("cat");
         System.out.println(result);
 
     }
@@ -13,7 +13,7 @@ public class Main {
         String[] args = new String[]{"cat", "dog", "fish"};
 
         for (String arg : args) {
-            if (arg.contains("cat")) {
+            if (message.contains(arg)) {
                 System.out.println("Test failed");
                 return " ";
             }
