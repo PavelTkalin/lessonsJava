@@ -103,13 +103,20 @@ public class Main {
 
     public static int maxElements(int[] arr4) {
         int maxNumber = 0;
-        for (int i = 0; i < arr4.length; i++) {
+        for (int i = 1; i < arr4.length; i++) {
             int currentNumber = arr4[i];
             if (currentNumber > maxNumber) {
                 maxNumber = currentNumber;
             }
+
         }
+
         return maxNumber;
+
+        if (arr4 == 0) {
+
+            throw new RuntimeException("array should contain elements");
+        }
     }
 
     public static int maxElementsEven(int[] arr4) {
@@ -156,7 +163,7 @@ public class Main {
         int minNumber = 0;
 
 
-        for (int i = 0; i < arr4.length; i++) {
+        for (int i = 1; i < arr4.length; i++) {
             int currentNumber = arr4[i];
             if (currentNumber > maxNumber) {
                 maxNumber = currentNumber;
