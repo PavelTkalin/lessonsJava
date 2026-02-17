@@ -154,7 +154,7 @@ public class Main {
     public static int[] minMaxElements(int[] arr4) {
         int maxNumber = 0;
         int minNumber = 0;
-        int[] arrMinMax = {minNumber, maxNumber};
+
 
         for (int i = 0; i < arr4.length; i++) {
             int currentNumber = arr4[i];
@@ -166,12 +166,13 @@ public class Main {
 
         for (int i = 0; i < arr4.length; i++) {
             int currentNumber = arr4[i];
-            if (currentNumber > minNumber) {
+            if (currentNumber < minNumber) {
                 minNumber = currentNumber;
             }
         }
-
+        int[] arrMinMax = {minNumber, maxNumber};
         return arrMinMax;
+
 
     }
 
