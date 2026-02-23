@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         int[] arr = {1, 2, 5};
-        int[] arr1 = {1, 2, 3, 5, 888, 10, 67, 99, 101, -3};
+        int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 99, 101, -3};
         int[] arr2 = {};
+        String[] words = {"man", "human", "beast"};
 
 //        System.out.println(weHaveSomeNumber(arr, 3));
 //        System.out.println(evenFind(arr));
@@ -17,12 +19,13 @@ public class Main {
 //        System.out.println(complexArrayHelper(arr2));
 //        System.out.println(sumOfElements(arr));
 //        System.out.println(sumOfElements(arr2));
-//        System.out.println(maxElements(arr1));
+//        System.out.println(maxElements(arr2));
 //        System.out.println(maxElementsEven(arr1));
 //        System.out.println(maxElementsIndex(arr1));
 //        System.out.println(minElements(arr1));
-        System.out.println(minMaxElements(arr1));
+//        System.out.println(Arrays.toString(minMaxElements(arr1)));
 
+        System.out.println(stringHelper(words, 6));
 
     }
 
@@ -102,7 +105,12 @@ public class Main {
     }
 
     public static int maxElements(int[] arr4) {
-        int maxNumber = 0;
+
+        if (arr4.length == 0) {
+
+            throw new RuntimeException("array should contain elements");
+        }
+        int maxNumber = arr4[0];
         for (int i = 1; i < arr4.length; i++) {
             int currentNumber = arr4[i];
             if (currentNumber > maxNumber) {
@@ -113,14 +121,11 @@ public class Main {
 
         return maxNumber;
 
-        if (arr4 == 0) {
 
-            throw new RuntimeException("array should contain elements");
-        }
     }
 
     public static int maxElementsEven(int[] arr4) {
-        int maxNumber = 0;
+        int maxNumber = arr4[0];
 
         for (int i = 0; i < arr4.length; i++) {
             int currentNumber = arr4[i];
@@ -159,22 +164,27 @@ public class Main {
     }
 
     public static int[] minMaxElements(int[] arr4) {
-        int maxNumber = 0;
-        int minNumber = 0;
 
+        if (arr4.length < 2) {
+            throw new RuntimeException("There should be at least 2 elements");
+        }
 
-        for (int i = 1; i < arr4.length; i++) {
-            int currentNumber = arr4[i];
-            if (currentNumber > maxNumber) {
-                maxNumber = currentNumber;
-            }
+        int maxNumber = arr4[0];
+        int minNumber = arr4[1];
+
+        if (arr4[0] < arr4[1]) {
+            minNumber = arr4[0];
+            maxNumber = arr4[1];
         }
 
 
-        for (int i = 0; i < arr4.length; i++) {
+        for (int i = 2; i < arr4.length; i++) {
             int currentNumber = arr4[i];
             if (currentNumber < minNumber) {
                 minNumber = currentNumber;
+            }
+            if (currentNumber > maxNumber) {
+                maxNumber = currentNumber;
             }
         }
         int[] arrMinMax = {minNumber, maxNumber};
@@ -182,6 +192,20 @@ public class Main {
 
 
     }
+
+    public static boolean stringHelper(String[] words, int n) {
+
+        for (int i = 0; i < words.length - 1; i++) {
+
+            if (words[i].length() > n && words[i + 1].length() > n) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
 
 }
