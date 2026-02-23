@@ -30,7 +30,8 @@ public class Main {
 //        System.out.println(stringHelper(words, 6));
 //        System.out.println(stringHelper3(arr1, 3));
 //        System.out.println(stringHelper2(arr1));
-        System.out.println(stringHelper4(words));
+//        System.out.println(stringHelper4(words));
+        System.out.println(stringHelper5(arr1));
 
     }
 
@@ -278,6 +279,23 @@ public class Main {
                 throw new RuntimeException("long String amount is equal to short string amount");
             }
         }
-            return false;
-        }
+        return false;
     }
+
+    public static boolean stringHelper5(int[] nums) {
+        if (nums.length < 3) {
+
+            throw new RuntimeException("array should contain more than 3 elements");
+        }
+
+        for (int i = 1; i < nums.length - 1; i++) {
+
+            if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+}
