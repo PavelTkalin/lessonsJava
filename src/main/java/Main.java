@@ -7,9 +7,9 @@ import static java.lang.Math.abs;
 public class Main {
     public static void main(String[] args) {
         int[] arr = {1, 1, 2};
-        int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 4, 4,6,8};
+        int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 4, 4, 6, 8};
         int[] arr2 = {};
-        String[] words = {"man", "human", "beast"};
+        String[] words = {"man", "hu", "beasteee"};
 
 //        System.out.println(weHaveSomeNumber(arr, 3));
 //        System.out.println(evenFind(arr));
@@ -29,7 +29,8 @@ public class Main {
 
 //        System.out.println(stringHelper(words, 6));
 //        System.out.println(stringHelper3(arr1, 3));
-        System.out.println(stringHelper2(arr1));
+//        System.out.println(stringHelper2(arr1));
+        System.out.println(stringHelper4(words));
 
     }
 
@@ -253,6 +254,32 @@ public class Main {
 
         return false;
 
+    }
+
+
+    public static boolean stringHelper4(String[] words) {
+
+        for (int i = 0; i < words.length - 1; i++) {
+
+            int shortStringCounter = 0;
+            int longStringCounter = 0;
+            if (words[i].length() <= 3) {
+                shortStringCounter = shortStringCounter + 1;
+            }
+            if (words[i].length() >= 6) {
+                longStringCounter = longStringCounter + 1;
+            }
+
+            if (longStringCounter > shortStringCounter) {
+                return true;
+            }
+
+            if (longStringCounter == shortStringCounter)
+            {
+                throw new RuntimeException("long String amount is equal to short string amount");
+        }
+
+        return false;
     }
 
 }
