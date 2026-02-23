@@ -274,12 +274,10 @@ public class Main {
                 return true;
             }
 
-            if (longStringCounter == shortStringCounter)
-            {
+            if (longStringCounter == shortStringCounter) {
                 throw new RuntimeException("long String amount is equal to short string amount");
+            }
         }
-
-        return false;
+            return false;
+        }
     }
-
-}
