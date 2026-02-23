@@ -6,8 +6,8 @@ import static java.lang.Math.abs;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 5};
-        int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 99, 101, -3};
+        int[] arr = {1, 1, 2};
+        int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 4, 4,6,8};
         int[] arr2 = {};
         String[] words = {"man", "human", "beast"};
 
@@ -28,7 +28,8 @@ public class Main {
 //        System.out.println(Arrays.toString(minMaxElements(arr1)));
 
 //        System.out.println(stringHelper(words, 6));
-        System.out.println(stringHelper3(arr1,3));
+//        System.out.println(stringHelper3(arr1, 3));
+        System.out.println(stringHelper2(arr1));
 
     }
 
@@ -198,7 +199,7 @@ public class Main {
 
     public static boolean stringHelper(String[] words, int n) {
 
-        for (int i = 0; i < words.length - 1; i++) {
+        for (int i = 0; i < words.length - 2; i++) {
 
             if (words[i].length() > n && words[i + 1].length() > n) {
                 return true;
@@ -224,7 +225,28 @@ public class Main {
 
         for (int i = 0; i < nums.length - 1; i++) {
 
-            if (abs(nums[i] - nums[i+1]) == k) {
+            if (abs(nums[i] - nums[i + 1]) == k) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    public static boolean stringHelper2(int[] nums) {
+        if (nums.length < 3) {
+
+            throw new RuntimeException("array should contain more than 3 elements");
+        }
+
+        for (int i = 0; i < nums.length - 2; i++) {
+
+            int firstNumber = nums[i];
+            int secondNumber = nums[i + 1];
+            int thirdNumber = nums[i + 2];
+
+            if (firstNumber == secondNumber && secondNumber == thirdNumber) {
                 return true;
             }
         }
