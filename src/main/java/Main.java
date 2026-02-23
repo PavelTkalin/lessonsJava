@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class Main {
     public static void main(String[] args) {
         int[] arr = {1, 2, 5};
@@ -25,7 +27,8 @@ public class Main {
 //        System.out.println(minElements(arr1));
 //        System.out.println(Arrays.toString(minMaxElements(arr1)));
 
-        System.out.println(stringHelper(words, 6));
+//        System.out.println(stringHelper(words, 6));
+        System.out.println(stringHelper3(arr1,3));
 
     }
 
@@ -205,7 +208,29 @@ public class Main {
         return false;
     }
 
+    public static boolean stringHelper2(String[] words, int n) {
 
+        for (int i = 0; i < words.length - 1; i++) {
 
+            if (words[i].length() > n && words[i + 1].length() > n) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean stringHelper3(int[] nums, int k) {
+
+        for (int i = 0; i < nums.length - 1; i++) {
+
+            if (abs(nums[i] - nums[i+1]) == k) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
 
 }
