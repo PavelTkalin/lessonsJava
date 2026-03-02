@@ -24,6 +24,12 @@ public class Main {
                 {1, 1, 1}
         };
 
+        int[][] diagonal = {
+                {1, 1, 1},
+                {1, 3, 0},
+                {1, 1, 5}
+        };
+
 
 //        printMatrix(matrix);
 
@@ -50,8 +56,9 @@ public class Main {
 //        System.out.println(stringHelper5(arr1));
 
 //        System.out.println(sumOfMatrix(matrix2));
-        System.out.println(maxElement(matrix));
-        System.out.println(nullCalculateInMatrix(matrix));
+//        System.out.println(maxElement(matrix));
+//        System.out.println(nullCalculateInMatrix(matrix));
+        System.out.println(diagonalCalcaltionMatrix(diagonal));
 
     }
 
@@ -380,7 +387,7 @@ public class Main {
         return maxElement;
     }
 
-    public static int nullCalculateInMatrix (int [][] nullMaxElement) {
+    public static int nullCalculateInMatrix(int[][] nullMaxElement) {
         int nullElementCount = 0;
         for (int i = 0; i < nullMaxElement.length; i++) {
             for (int j = 0; j < nullMaxElement[i].length; j++) {
@@ -392,5 +399,19 @@ public class Main {
 
         }
         return nullElementCount;
+    }
+
+    public static int diagonalCalcaltionMatrix(int[][] diagonalCalculationMatrix) {
+        int diagonalCalcialtio = 0;
+        for (int i = 0; i < diagonalCalculationMatrix.length; i++) {
+            for (int j = 0; j < diagonalCalculationMatrix[i].length; j++) {
+                if (i == j) {
+                    diagonalCalcialtio = diagonalCalculationMatrix[i][j] + diagonalCalcialtio;
+                }
+
+            }
+
+        }
+        return diagonalCalcialtio;
     }
 }
