@@ -480,7 +480,7 @@ public class Main {
 
     public static int[][] matrixTranspond(int[][] matrixSymmetryTry) {
 
-        int[][] matrixSymmetryTranspond = [0][0];
+        int[][] matrixSymmetryTranspond;
         for (int i = 0; i < matrixSymmetryTry.length; i++) {
             for (int j = 0; j < matrixSymmetryTry.length; j++) {
                 matrixSymmetryTry[i][j] = matrixSymmetryTranspond[j][i];
