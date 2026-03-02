@@ -19,7 +19,7 @@ public class Main {
 
         int[][] matrix2 = {
                 {1, 1, 1},
-                {1, 1, 1},
+                {1, 0, 0},
                 {1, 1, 1},
                 {1, 1, 1}
         };
@@ -49,7 +49,9 @@ public class Main {
 //        System.out.println(stringHelper4(words));
 //        System.out.println(stringHelper5(arr1));
 
-        System.out.println(sumOfMatrix(matrix2));
+//        System.out.println(sumOfMatrix(matrix2));
+        System.out.println(maxElement(matrix));
+        System.out.println(nullCalculateInMatrix(matrix));
 
     }
 
@@ -357,10 +359,38 @@ public class Main {
         int sum = 0;
         for (int i = 0; i < matrixSum.length; i++) {
             for (int j = 0; j < matrixSum[i].length; j++) {
-                sum=sum+matrixSum[i][j];
+                sum = sum + matrixSum[i][j];
             }
 
         }
         return sum;
+    }
+
+    public static int maxElement(int[][] matrixMaxElement) {
+        int maxElement = 0;
+        for (int i = 0; i < matrixMaxElement.length; i++) {
+            for (int j = 0; j < matrixMaxElement[i].length; j++) {
+                if (matrixMaxElement[i][j] > maxElement) {
+                    maxElement = matrixMaxElement[i][j];
+                }
+
+            }
+
+        }
+        return maxElement;
+    }
+
+    public static int nullCalculateInMatrix (int [][] nullMaxElement) {
+        int nullElementCount = 0;
+        for (int i = 0; i < nullMaxElement.length; i++) {
+            for (int j = 0; j < nullMaxElement[i].length; j++) {
+                if (nullMaxElement[i][j] == 0) {
+                    nullElementCount = nullElementCount + 1;
+                }
+
+            }
+
+        }
+        return nullElementCount;
     }
 }
