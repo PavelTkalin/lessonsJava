@@ -18,15 +18,15 @@ public class Main {
         };
 
         int[][] matrix2 = {
-                {1, 1, 1},
-                {1, 0, 0},
+                {1, 2, 1},
+                {2, 0, 0},
                 {1, 1, 1},
                 {1, 1, 1}
         };
 
         int[][] diagonal = {
-                {1, 1, 1},
-                {1, 3, 0},
+                {2, 1, 1},
+                {1, 2, 1},
                 {-1, 1, 5}
         };
 
@@ -58,8 +58,9 @@ public class Main {
 //        System.out.println(sumOfMatrix(matrix2));
 //        System.out.println(maxElement(matrix));
 //        System.out.println(nullCalculateInMatrix(matrix));
-        System.out.println(diagonalCalcaltionMatrix(diagonal));
-        System.out.println(ifNegativeInMatrixExist(diagonal));
+//        System.out.println(diagonalCalcaltionMatrix(diagonal));
+//        System.out.println(ifNegativeInMatrixExist(diagonal));
+        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
 
     }
 
@@ -429,5 +430,20 @@ public class Main {
 
         }
         return negativeValues;
+    }
+
+    public static int ifEvenNumbersPresentInMatrix(int[][] ifEvenInMatrixExist) {
+        int evenNumbers = 0;
+        for (int i = 0; i < ifEvenInMatrixExist.length; i++) {
+            for (int j = 0; j < ifEvenInMatrixExist[i].length; j++) {
+                if (ifEvenInMatrixExist[i][j] % 2 == 0) {
+                    evenNumbers = evenNumbers + 1;
+
+                }
+
+            }
+
+        }
+        return evenNumbers;
     }
 }
