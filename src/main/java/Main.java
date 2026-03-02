@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -477,4 +478,16 @@ public class Main {
         return matrixSymmetryFlag;
     }
 
+    public static int[][] matrixTranspond(int[][] matrixSymmetryTry) {
+
+        int[][] matrixSymmetryTranspond = [0][0];
+        for (int i = 0; i < matrixSymmetryTry.length; i++) {
+            for (int j = 0; j < matrixSymmetryTry.length; j++) {
+                matrixSymmetryTry[i][j] = matrixSymmetryTranspond[j][i];
+
+            }
+
+        }
+        return matrixSymmetryTranspond;
+    }
 }
