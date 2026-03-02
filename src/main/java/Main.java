@@ -446,4 +446,35 @@ public class Main {
         }
         return evenNumbers;
     }
+
+    public static int indexRowMaxSumOfElements(int[][] matrixSumOfElements) {
+        int indexMaxRow = 0;
+        for (int i = 0; i < matrixSumOfElements.length; i++) {
+            for (int j = 0; j < matrixSumOfElements[i].length; j++) {
+                if (matrixSumOfElements[i][j] > indexMaxRow) {
+                    return i;
+
+                }
+
+            }
+
+        }
+        return indexMaxRow;
+    }
+
+    public static boolean matrixSymmetry(int[][] matrixSymmetryTry) {
+        boolean matrixSymmetryFlag = false;
+        for (int i = 0; i < matrixSymmetryTry.length; i++) {
+            for (int j = 0; j < matrixSymmetryTry.length; j++) {
+                if (matrixSymmetryTry[i][j] == matrixSymmetryTry[j][i]) {
+                    matrixSymmetryFlag = true;
+
+                }
+
+            }
+
+        }
+        return matrixSymmetryFlag;
+    }
+
 }
