@@ -27,7 +27,7 @@ public class Main {
         int[][] diagonal = {
                 {1, 1, 1},
                 {1, 3, 0},
-                {1, 1, 5}
+                {-1, 1, 5}
         };
 
 
@@ -59,6 +59,7 @@ public class Main {
 //        System.out.println(maxElement(matrix));
 //        System.out.println(nullCalculateInMatrix(matrix));
         System.out.println(diagonalCalcaltionMatrix(diagonal));
+        System.out.println(ifNegativeInMatrixExist(diagonal));
 
     }
 
@@ -413,5 +414,20 @@ public class Main {
 
         }
         return diagonalCalcialtio;
+    }
+
+    public static boolean ifNegativeInMatrixExist(int[][] ifNegativeInMatrixExist) {
+        boolean negativeValues = false;
+        for (int i = 0; i < ifNegativeInMatrixExist.length; i++) {
+            for (int j = 0; j < ifNegativeInMatrixExist[i].length; j++) {
+                if (ifNegativeInMatrixExist[i][j] < 0) {
+                    negativeValues = true;
+                    break;
+                }
+
+            }
+
+        }
+        return negativeValues;
     }
 }
