@@ -9,7 +9,33 @@ public class Main {
         int[] arr = {1, 1, 2};
         int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 4, 4, 6, 8};
         int[] arr2 = {};
-        String[] words = {"man", "hu", "beasteee"};
+        String[] words = {"a", "aa", "aaa", "aaa"};
+        int[][] matrix = {
+                {1, 2, 4},
+                {3, 2, 1},
+                {5, 3, 1},
+                {2, 3, 4}
+        };
+
+        int[][] matrix2 = {
+                {1, 1, 1},
+                {1, 1, 1},
+                {1, 1, 1},
+                {1, 1, 1}
+        };
+
+
+//        printMatrix(matrix);
+        System.out.println(sumOfMatrix(matrix2));;
+        System.out.println(maxInMatrix(matrix));;
+        System.out.println(nullsInMatrix(matrix));;
+        System.out.println(sumOfDiagonal(matrix));;
+        System.out.println(ifThereIsNegative(matrix));;
+        System.out.println(evenCountMatrix(matrix));;
+        System.out.println(returnStringLengthOfMaxInMatrix(matrix));;
+        System.out.println(transposeMatrix(matrix));;
+        System.out.println(transposeMatrix(matrix2));;
+        System.out.println(symmetricMatrix(matrix));;
 
 //        System.out.println(weHaveSomeNumber(arr, 3));
 //        System.out.println(evenFind(arr));
@@ -27,11 +53,11 @@ public class Main {
 //        System.out.println(minElements(arr1));
 //        System.out.println(Arrays.toString(minMaxElements(arr1)));
 
-//        System.out.println(stringHelper(words, 6));
+//        System.out.println(stringHelper(words, 3));
 //        System.out.println(stringHelper3(arr1, 3));
 //        System.out.println(stringHelper2(arr1));
 //        System.out.println(stringHelper4(words));
-        System.out.println(stringHelper5(arr1));
+//        System.out.println(stringHelper5(arr1));
 
     }
 
@@ -201,9 +227,9 @@ public class Main {
 
     public static boolean stringHelper(String[] words, int n) {
 
-        for (int i = 0; i < words.length - 2; i++) {
+        for (int i = 0; i < words.length - 1; i++) {
 
-            if (words[i].length() > n && words[i + 1].length() > n) {
+            if (words[i].length() >= n && words[i + 1].length() >= n) {
                 return true;
             }
         }
@@ -265,18 +291,14 @@ public class Main {
             int shortStringCounter = 0;
             int longStringCounter = 0;
             if (words[i].length() <= 3) {
-                shortStringCounter = shortStringCounter + 1;
+                shortStringCounter += 1;
             }
             if (words[i].length() >= 6) {
-                longStringCounter = longStringCounter + 1;
+                longStringCounter += 1;
             }
 
             if (longStringCounter > shortStringCounter) {
                 return true;
-            }
-
-            if (longStringCounter == shortStringCounter) {
-                throw new RuntimeException("long String amount is equal to short string amount");
             }
         }
         return false;
@@ -297,5 +319,142 @@ public class Main {
 
         return false;
 
+    }
+
+    public static boolean twoStringLengthCalculation(String[] strings) {
+
+        for (int i = 0; i < strings.length; i++) {
+
+            int String1Length = strings[i].length();
+
+            for (int j = 0; j < strings.length; j++) {
+                if (i == j) {
+                    continue;
+                }
+                int String2Length = strings[j].length();
+                if (String1Length == String2Length) {
+                    return true;
+                }
+            }
+
+
+        }
+        return false;
+    }
+
+    public static void printMatrix(int[][] matrixVar) {
+        for (int i = 0; i < matrixVar.length; i++) {
+            Arrays.toString(matrixVar[i]);
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                System.out.print(matrixVar[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printMatrix2(int[][] matrixVar) {
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                System.out.print(matrixVar[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static int sumOfMatrix(int[][] matrixVar) {
+        int sum = 0;
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                sum += matrixVar[i][j];
+            }
+        }
+        return sum;
+    }
+
+    public static int maxInMatrix(int[][] matrixVar) {
+        int maxNumber = matrixVar[0][0];
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                if (matrixVar[i][j] > maxNumber) {
+                    maxNumber = matrixVar[i][j];
+                }
+            }
+        }
+        return maxNumber;
+    }
+
+    public static int nullsInMatrix(int[][] matrixVar) {
+        int nullsCounter = 0;
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                if (matrixVar[i][j] == 0) {
+                    nullsCounter += 1;
+                }
+            }
+        }
+        return nullsCounter;
+    }
+    public static int sumOfDiagonal(int[][] matrixVar) {
+        int sum = 0;
+        for (int i = 0; i < matrixVar.length-1; i++) {
+            sum += matrixVar[i][i];
+        }
+        return sum;
+    }
+
+    public static int ifThereIsNegative(int[][] matrixVar) {
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                if (matrixVar[i][j] < 0) {
+                    return matrixVar[i][j];
+                }
+            }
+        }
+        return 0;
+    }
+
+    public static int evenCountMatrix(int[][] matrixVar) {
+        int evenCounter = 0;
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                if (matrixVar[i][j] % 2 == 0) {
+                    evenCounter += 1;
+                }
+            }
+        }
+        return evenCounter;
+    }
+    public static int returnStringLengthOfMaxInMatrix(int[][] matrixVar) {
+        int maxNumber = matrixVar[0][0];
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                if (matrixVar[i][j] > maxNumber) {
+                    maxNumber = matrixVar[i][j];
+                }
+            }
+        }
+        return String.valueOf(maxNumber).length();
+    }
+
+    public static int transposeMatrix(int[][] matrixVar) {
+        int[][] transposedMatrix = new int[matrixVar[0].length][matrixVar.length];
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                transposedMatrix[j][i] = matrixVar[i][j];
+            }
+        }
+        printMatrix(transposedMatrix);
+        return 0;
+    }
+
+    public static int symmetricMatrix(int[][] matrixVar) {
+        for (int i = 0; i < matrixVar.length; i++) {
+            for (int j = 0; j < matrixVar[i].length; j++) {
+                if (matrixVar[i][j] != matrixVar[j][i]) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
     }
 }
