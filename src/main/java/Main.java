@@ -26,16 +26,6 @@ public class Main {
 
 
 //        printMatrix(matrix);
-        System.out.println(sumOfMatrix(matrix2));;
-        System.out.println(maxInMatrix(matrix));;
-        System.out.println(nullsInMatrix(matrix));;
-        System.out.println(sumOfDiagonal(matrix));;
-        System.out.println(ifThereIsNegative(matrix));;
-        System.out.println(evenCountMatrix(matrix));;
-        System.out.println(returnStringLengthOfMaxInMatrix(matrix));;
-        System.out.println(transposeMatrix(matrix));;
-        System.out.println(transposeMatrix(matrix2));;
-        System.out.println(symmetricMatrix(matrix));;
 
 //        System.out.println(weHaveSomeNumber(arr, 3));
 //        System.out.println(evenFind(arr));
@@ -58,6 +48,8 @@ public class Main {
 //        System.out.println(stringHelper2(arr1));
 //        System.out.println(stringHelper4(words));
 //        System.out.println(stringHelper5(arr1));
+
+        System.out.println(sumOfMatrix(matrix2));
 
     }
 
@@ -361,100 +353,14 @@ public class Main {
         }
     }
 
-    public static int sumOfMatrix(int[][] matrixVar) {
+    public static int sumOfMatrix(int[][] matrixSum) {
         int sum = 0;
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                sum += matrixVar[i][j];
+        for (int i = 0; i < matrixSum.length; i++) {
+            for (int j = 0; j < matrixSum[i].length; j++) {
+                sum=sum+matrixSum[i][j];
             }
+
         }
         return sum;
-    }
-
-    public static int maxInMatrix(int[][] matrixVar) {
-        int maxNumber = matrixVar[0][0];
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                if (matrixVar[i][j] > maxNumber) {
-                    maxNumber = matrixVar[i][j];
-                }
-            }
-        }
-        return maxNumber;
-    }
-
-    public static int nullsInMatrix(int[][] matrixVar) {
-        int nullsCounter = 0;
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                if (matrixVar[i][j] == 0) {
-                    nullsCounter += 1;
-                }
-            }
-        }
-        return nullsCounter;
-    }
-    public static int sumOfDiagonal(int[][] matrixVar) {
-        int sum = 0;
-        for (int i = 0; i < matrixVar.length-1; i++) {
-            sum += matrixVar[i][i];
-        }
-        return sum;
-    }
-
-    public static int ifThereIsNegative(int[][] matrixVar) {
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                if (matrixVar[i][j] < 0) {
-                    return matrixVar[i][j];
-                }
-            }
-        }
-        return 0;
-    }
-
-    public static int evenCountMatrix(int[][] matrixVar) {
-        int evenCounter = 0;
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                if (matrixVar[i][j] % 2 == 0) {
-                    evenCounter += 1;
-                }
-            }
-        }
-        return evenCounter;
-    }
-    public static int returnStringLengthOfMaxInMatrix(int[][] matrixVar) {
-        int maxNumber = matrixVar[0][0];
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                if (matrixVar[i][j] > maxNumber) {
-                    maxNumber = matrixVar[i][j];
-                }
-            }
-        }
-        return String.valueOf(maxNumber).length();
-    }
-
-    public static int transposeMatrix(int[][] matrixVar) {
-        int[][] transposedMatrix = new int[matrixVar[0].length][matrixVar.length];
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                transposedMatrix[j][i] = matrixVar[i][j];
-            }
-        }
-        printMatrix(transposedMatrix);
-        return 0;
-    }
-
-    public static int symmetricMatrix(int[][] matrixVar) {
-        for (int i = 0; i < matrixVar.length; i++) {
-            for (int j = 0; j < matrixVar[i].length; j++) {
-                if (matrixVar[i][j] != matrixVar[j][i]) {
-                    return 0;
-                }
-            }
-        }
-        return 1;
     }
 }
