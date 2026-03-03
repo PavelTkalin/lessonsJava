@@ -61,7 +61,9 @@ public class Main {
 //        System.out.println(nullCalculateInMatrix(matrix));
 //        System.out.println(diagonalCalcaltionMatrix(diagonal));
 //        System.out.println(ifNegativeInMatrixExist(diagonal));
-        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
+//        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
+//        printMatrix(matrixTranspond(matrix2));
+        System.out.println(matrixSymmetry(diagonal));
 
     }
 
@@ -449,18 +451,20 @@ public class Main {
     }
 
     public static int indexRowMaxSumOfElements(int[][] matrixSumOfElements) {
+        int valueMaxRow = 0;
         int indexMaxRow = 0;
+
         for (int i = 0; i < matrixSumOfElements.length; i++) {
             for (int j = 0; j < matrixSumOfElements[i].length; j++) {
-                if (matrixSumOfElements[i][j] > indexMaxRow) {
-                    return i;
+                if (matrixSumOfElements[i][j] > valueMaxRow) {
+                    indexMaxRow == i;
 
                 }
 
             }
 
         }
-        return indexMaxRow;
+        return valueMaxRow;
     }
 
     public static boolean matrixSymmetry(int[][] matrixSymmetryTry) {
@@ -480,7 +484,7 @@ public class Main {
 
     public static int[][] matrixTranspond(int[][] matrixSymmetryTry) {
 
-        int[][] matrixSymmetryTranspond;
+        int[][] matrixSymmetryTranspond = new int[0][];
         for (int i = 0; i < matrixSymmetryTry.length; i++) {
             for (int j = 0; j < matrixSymmetryTry.length; j++) {
                 matrixSymmetryTry[i][j] = matrixSymmetryTranspond[j][i];
