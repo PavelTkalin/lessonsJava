@@ -62,8 +62,8 @@ public class Main {
 //        System.out.println(diagonalCalcaltionMatrix(diagonal));
 //        System.out.println(ifNegativeInMatrixExist(diagonal));
 //        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
-//        printMatrix(matrixTranspond(matrix2));
-        System.out.println(matrixSymmetry(diagonal));
+        printMatrix(matrixTranspond(matrix2));
+//        System.out.println(matrixSymmetry(diagonal));
 
     }
 
@@ -450,48 +450,57 @@ public class Main {
         return evenNumbers;
     }
 
+
     public static int indexRowMaxSumOfElements(int[][] matrixSumOfElements) {
-        int valueMaxRow = 0;
+        if (matrixSumOfElements.length == 0) {
+            throw new IllegalArgumentException("Matrix is empty");
+        }
+
+        int valueMaxSumRow = 0;
         int indexMaxRow = 0;
 
         for (int i = 0; i < matrixSumOfElements.length; i++) {
-            for (int j = 0; j < matrixSumOfElements[i].length; j++) {
-                if (matrixSumOfElements[i][j] > valueMaxRow) {
-                    indexMaxRow == i;
+            int[] currentRow = matrixSumOfElements[i];
 
-                }
+            int rowSum = 0;
 
+            // суммируем
+            for (int j = 0; j < currentRow.length; j++) {
+                int currentNumber = currentRow[j];
+                rowSum += currentNumber;
+            }
+
+            if ((i == 0) || (rowSum > valueMaxSumRow)) {
+                valueMaxSumRow = rowSum;
+                indexMaxRow = i;
             }
 
         }
-        return valueMaxRow;
+        return indexMaxRow;
     }
 
-    public static boolean matrixSymmetry(int[][] matrixSymmetryTry) {
-        boolean matrixSymmetryFlag = false;
-        for (int i = 0; i < matrixSymmetryTry.length; i++) {
-            for (int j = 0; j < matrixSymmetryTry.length; j++) {
-                if (matrixSymmetryTry[i][j] == matrixSymmetryTry[j][i]) {
-                    matrixSymmetryFlag = true;
+    public static int[][] matrixTranspose(int[][] matrix) {
+//        int[][] matrix = {
+//            {1, 1, 1},
+//            {2, 2, 2},
+//        };
 
-                }
+//        int[][] matrix = {
+//            {1, 2},
+//            {1, 2},
+//            {1, 2},
+//        };
 
+        int rowSize = matrix[0].length;
+        int[][] transposedMatrix = new int[rowSize][matrix.length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; ++j) {
+                int currentNum = matrix[i][j];
+                transposedMatrix[j][i] = currentNum;
             }
-
         }
-        return matrixSymmetryFlag;
-    }
 
-    public static int[][] matrixTranspond(int[][] matrixSymmetryTry) {
-
-        int[][] matrixSymmetryTranspond = new int[0][];
-        for (int i = 0; i < matrixSymmetryTry.length; i++) {
-            for (int j = 0; j < matrixSymmetryTry.length; j++) {
-                matrixSymmetryTry[i][j] = matrixSymmetryTranspond[j][i];
-
-            }
-
-        }
-        return matrixSymmetryTranspond;
+        return transposedMatrix;
     }
 }
