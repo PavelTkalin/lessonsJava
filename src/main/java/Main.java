@@ -1,7 +1,6 @@
 import javax.crypto.spec.PSource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 
 import static java.lang.Math.abs;
 
@@ -575,15 +574,52 @@ public class Main {
         return table;
     }
 
-    public static void squareOfStars(int n) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print("*");
+    public static int doubleMatrixCount(int[][] doubleMatrix) {
+
+        int sum = 0;
+
+        for (int i = 0; i < doubleMatrix.length; i++) {
+            for (int j = 0; j < doubleMatrix[i].length; j++) {
+                sum = sum + doubleMatrix[i][j];
             }
-            System.out.println(); // переход на новую строку
         }
+        return sum;
     }
 
+
+    public static Integer repetitionCounter(int[] arr) {
+        Map<Integer, Integer> dict = new HashMap<>();
+
+        for (int num : arr) {
+            if (dict.containsKey(num)) {
+                return num;
+            }
+            dict.put(num, 1);
+        }
+
+        return null;
+    }
+
+    public static Integer firstDuplicate(int[] arr) {
+        Set<Integer> seen = new HashSet<>();
+
+        for (int num : arr) {
+            if (seen.contains(num)) {
+                return num; // первый повтор
+            }
+            seen.add(num);
+        }
+
+        return null; // если нет повторов
+    }
 }
+
+
+
+
+}
+
+
+
 
 
