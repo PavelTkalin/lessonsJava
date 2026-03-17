@@ -586,18 +586,18 @@ public class Main {
         return sum;
     }
 
-
-    public static Integer repetitionCounter(int[] arr) {
-        Map<Integer, Integer> dict = new HashMap<>();
+    public static Map<Integer, Integer> countNumbers(int[] arr) {
+        Map<Integer, Integer> result = new HashMap<>();
 
         for (int num : arr) {
-            if (dict.containsKey(num)) {
-                return num;
+            if (result.containsKey(num)) {
+                result.put(num, result.get(num) + 1);
+            } else {
+                result.put(num, 1);
             }
-            dict.put(num, 1);
         }
 
-        return null;
+        return result;
     }
 
     public static Integer firstDuplicate(int[] arr) {
@@ -605,7 +605,7 @@ public class Main {
 
         for (int num : arr) {
             if (seen.contains(num)) {
-                return num; // первый повтор
+                return num;
             }
             seen.add(num);
         }
@@ -613,6 +613,9 @@ public class Main {
         return null;
     }
 }
+
+
+
 
 
 
