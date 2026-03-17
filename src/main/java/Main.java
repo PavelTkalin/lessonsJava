@@ -610,7 +610,7 @@ public class Main {
             seen.add(num);
         }
 
-        return null; // если нет повторов
+        return null;
     }
 }
 
