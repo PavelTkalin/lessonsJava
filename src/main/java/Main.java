@@ -1,3 +1,4 @@
+import javax.crypto.spec.PSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -555,4 +556,34 @@ public class Main {
         return reversedString;
     }
 
+    public static int[] multiplyTable(int number) {
+
+        if (number == 0) {
+            throw new RuntimeException("num should not more than zero");
+        }
+
+        int[] table = new int[0];
+        int multiplier = 1;
+
+        for (int i = 0; i < table.length; i++) {
+
+            table[i] = multiplier * number;
+            multiplier++;
+
+
+        }
+        return table;
+    }
+
+    public static void squareOfStars(int n) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print("*");
+            }
+            System.out.println(); // переход на новую строку
+        }
+    }
+
 }
+
+
