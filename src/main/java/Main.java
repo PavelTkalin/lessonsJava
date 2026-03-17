@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,7 +61,6 @@ public class Main {
 //        System.out.println(diagonalCalcaltionMatrix(diagonal));
 //        System.out.println(ifNegativeInMatrixExist(diagonal));
 //        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
-        printMatrix(matrixTranspond(matrix2));
 //        System.out.println(matrixSymmetry(diagonal));
 
     }
@@ -503,4 +501,58 @@ public class Main {
 
         return transposedMatrix;
     }
+
+    /// HashMaps
+
+    public static int sumOfNumbers(int n) {
+
+        int[] numbers = new int[0];
+        int sumOfNumbers = numbers[0];
+
+        for (int i = 0; i < n; i++) {
+            if (numbers[i] < n) {
+                sumOfNumbers = numbers[i] + sumOfNumbers;
+            }
+
+        }
+        return sumOfNumbers;
+    }
+
+    public static int evenCount(int[] numbersInput) {
+
+        int evenNumber = numbersInput[0];
+
+        for (int i = 0; i < numbersInput.length; i++) {
+            if (numbersInput[i] % 2 == 0) {
+                evenNumber++;
+            }
+
+        }
+        return evenNumber;
+    }
+
+    public static int findMaxNumber(int[] numbers) {
+
+        int maxNumber = numbers[0];
+
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > maxNumber) {
+                maxNumber = numbers[i];
+            }
+
+        }
+        return maxNumber;
+    }
+
+    public static String reversedString(String newString) {
+
+        String reversedString = "";
+
+        for (int i = newString.length() - 1; i >= 0; i--) {
+            reversedString += newString.charAt(i);
+
+        }
+        return reversedString;
+    }
+
 }
