@@ -591,8 +591,9 @@ public class Main {
 
         for (int num : arr) {
             if (result.containsKey(num)) {
-                result.put(num, result.get(num) + 1);
+                result.put(num, result.get(num - 1));
             } else {
+
                 result.put(num, 1);
             }
         }
