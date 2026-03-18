@@ -1,5 +1,5 @@
-import javax.crypto.spec.PSource;
 import java.util.*;
+import java.util.Objects;
 
 
 import static java.lang.Math.abs;
@@ -555,13 +555,17 @@ public class Main {
         return reversedString;
     }
 
+    //можно решить по другому классически
+
     public static int[] multiplyTable(int number) {
 
         if (number == 0) {
             throw new RuntimeException("num should not more than zero");
         }
 
-        int[] table = new int[0];
+        int[] table = {0};
+
+        //в фигурных мы подставляем значения
         int multiplier = 1;
 
         for (int i = 0; i < table.length; i++) {
@@ -586,6 +590,8 @@ public class Main {
         return sum;
     }
 
+    //берем элемент строки и каждый элемент строки во внутреннем цикле
+
     public static Map<Integer, Integer> countNumbers(int[] arr) {
         Map<Integer, Integer> result = new HashMap<>();
 
@@ -601,6 +607,8 @@ public class Main {
         return result;
     }
 
+    //Map это интерфейс, HashMap один из классов который интерфейс имплементирует Ключей может быть сколько угодно важно чтобы не повторялись
+
     public static Integer firstDuplicate(int[] arr) {
         Set<Integer> seen = new HashSet<>();
 
@@ -613,7 +621,244 @@ public class Main {
 
         return null;
     }
+
+    //HashSet это только ключи а значения null
+    {
+        // Пример использования Singleton
+        SomeDB.getInstance().doQuery(); // long, with connection init
+        SomeDB.getInstance(); // fast
+        SomeDB.getInstance(); // fast
+        SomeDB.getInstance(); // long - timeout connection
+
+        // Пример задачи разработчика
+        // 1. get user
+        // 2. change user
+        // 3. send to DB
+
+        // от http-запроса данные от фронта
+        int userId = 1238;
+        String newName = "Oleg";
+
+        User User = UserFactory.getUserByID(userId);
+        String name = User.getName();
+
+        // 2. set and validate
+        User.setName(newName);
+
+        // 3. send to DB
+        IDB DB = DBFactory.getDBConnection();
+        DB.recordData("");
+    }
+
 }
+
+// Singleton
+static class SomeDB {
+    private static SomeDB instance;
+
+    private SomeDB() {
+        // connect
+    }
+
+    public static SomeDB getInstance() {
+        if (!(instance instanceof SomeDB)) {
+            instance = new SomeDB();
+        }
+        return instance;
+    }
+
+    public void doQuery() {
+    }
+}
+
+// Feature department
+static class User {
+    int id;
+    String name;
+
+    User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        if (this.validateName(name)) {
+            this.name = name;
+        }
+        throw new IllegalArgumentException("Bad name");
+    }
+
+    private boolean validateName(String name) {
+        if (name.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+}
+
+class UserFactory {
+    public static User getUserByID(int id) {
+        // поход в БД
+        // select id, name, <...> from User where User.id=#id
+        int userId = id;
+        String userName = "Vitalii";
+
+        return new User(userId, userName);
+    }
+}
+
+// Infra department
+class DBFactory {
+    // читается из конфига
+    private static int IP = 23123123;
+    // private static String targetDB = "MySQL";
+    private static String targetDB = "PostgreSQL";
+
+    public static IDB getDBConnection() {
+        if (Objects.equals(targetDB, "PostgreSQL")) {
+            return new PostgreSQL(IP);
+        } else {
+            return new MySQL(IP);
+        }
+    }
+}
+
+static class MySQL implements IDB {
+    int connectionIP;
+
+    MySQL(int connectionIP) {
+        this.connectionIP = connectionIP;
+    }
+
+    public String getData(String query) {
+        // select id, name, <...> from User where User.id=#id
+        return "Vitalii";
+    }
+
+    public void recordData(String query) {
+        // insert into <....>
+    }
+
+    public void deleteData(String query) {
+        // delete <....>
+    }
+
+    public void somethingOnlyForMySQL() {
+
+    }
+}
+
+static class PostgreSQL implements IDB {
+    int connectionIP;
+
+    PostgreSQL(int connectionIP) {
+        this.connectionIP = connectionIP;
+        // create connection --> connect to DB
+    }
+
+    public String getData(String query) {
+        // select id, name, <...> from User where User.id=#id
+        return "Vitalii";
+    }
+
+    public void recordData(String query) {
+        // insert into <....>
+    }
+
+    public void deleteData(String query) {
+        // delete <....>
+    }
+
+    public void somethingOnlyForPostgreSQL() {
+
+    }
+}
+
+interface IDB {
+    public String getData(String query);
+
+    public void recordData(String query);
+
+    public void deleteData(String query);
+}
+
+
+class Input {
+    int messageId;
+    String messagePayload;
+
+    Input(int messageId, String messagePayload) {
+        this.messageId = messageId;
+        this.messagePayload = messagePayload;
+    }
+
+    public String getMessagePayload() {
+        return this.messagePayload;
+    }
+
+
+    public void SetMessagePayload(String messagePayload) {
+        if (this.validateInput(messagePayload)) {
+
+            this.messagePayload = messagePayload;
+        }
+        throw new IllegalArgumentException("input is not correct");
+    }
+
+    public boolean validateInput(String messagePayload) {
+        if (messagePayload.isEmpty()) {
+            return false;
+        } else return true;
+    }
+}
+
+public Input getUserByID(int id) {
+    int userId = id;
+    String name = "Vasily";
+
+    return new Input(userId, name);
+}
+
+interface fieldInputMethods {
+    public String getInput(String input);
+
+    public void editInput(String input);
+
+    public void deleteInput(String query);
+}
+
+class InputFactory implements fieldInputMethods {
+
+    String input;
+
+    InputFactory(String input) {
+        this.input = input;
+    }
+
+    public String getInput(String input) {
+
+        return "client_message";
+    }
+
+    public void editInput(String input) {
+
+    }
+
+    public void deleteInput(String input) {
+
+    }
+}
+
+void main() {
+}
+
+
+
+
 
 
 
