@@ -1,10 +1,9 @@
 import java.util.*;
 import java.util.Objects;
 
-
 import static java.lang.Math.abs;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
         int[] arr = {1, 1, 2};
         int[] arr1 = {1, 2, 3, 5, -888, -10, 67, 4, 4, 6, 8};
@@ -51,7 +50,7 @@ public class Main {
 
 //        System.out.println(stringHelper(words, 3));
 //        System.out.println(stringHelper3(arr1, 3));
-//        System.out.println(stringHelper2(arr1));
+//        System.out.println(stringHelperIntTriple(arr1));
 //        System.out.println(stringHelper4(words));
 //        System.out.println(stringHelper5(arr1));
 
@@ -63,6 +62,35 @@ public class Main {
 //        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
 //        System.out.println(matrixSymmetry(diagonal));
 
+        // Пример использования Singleton
+        SomeDB.getInstance().doQuery(); // long, with connection init
+        SomeDB.getInstance(); // fast
+        SomeDB.getInstance(); // fast
+        SomeDB.getInstance(); // long - timeout connection
+
+        // Пример задачи разработчика
+        // 1. get user
+        // 2. change user
+        // 3. send to DB
+
+        // от http-запроса данные от фронта
+        int userId = 1238;
+        String newName = "Oleg";
+
+        User user = UserFactory.getUserByID(userId);
+        String name = user.getName();
+
+        // 2. set and validate
+        user.setName(newName);
+
+        // 3. send to DB
+        IDB DB = DBFactory.getDBConnection();
+        DB.recordData("");
+
+        int messageId = 11;
+        Input input = NewInputFactory.getMessageById(messageId);
+        String messagePayload = input.getMessagePayload();
+        input.SetMessagePayload("newPayload");
     }
 
     // we have a FLAG here - if our array "Good" or "Bad'
@@ -266,7 +294,8 @@ public class Main {
 
     }
 
-    public static boolean stringHelper2(int[] nums) {
+    // Renamed from stringHelper2(int[]) to avoid duplicate method name
+    public static boolean stringHelperIntTriple(int[] nums) {
         if (nums.length < 3) {
 
             throw new RuntimeException("array should contain more than 3 elements");
@@ -329,14 +358,14 @@ public class Main {
 
         for (int i = 0; i < strings.length; i++) {
 
-            int String1Length = strings[i].length();
+            int string1Length = strings[i].length();
 
             for (int j = 0; j < strings.length; j++) {
                 if (i == j) {
                     continue;
                 }
-                int String2Length = strings[j].length();
-                if (String1Length == String2Length) {
+                int string2Length = strings[j].length();
+                if (string1Length == string2Length) {
                     return true;
                 }
             }
@@ -493,7 +522,7 @@ public class Main {
         int[][] transposedMatrix = new int[rowSize][matrix.length];
 
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; ++j) {
+            for (int j = 0; j < matrix[i].length; ++j) {
                 int currentNum = matrix[i][j];
                 transposedMatrix[j][i] = currentNum;
             }
@@ -555,7 +584,7 @@ public class Main {
         return reversedString;
     }
 
-    //можно решить по другому классически
+//можно решить по другому классически
 
     public static int[] multiplyTable(int number) {
 
@@ -590,14 +619,14 @@ public class Main {
         return sum;
     }
 
-    //берем элемент строки и каждый элемент строки во внутреннем цикле
+//берем элемент строки и каждый элемент строки во внутреннем цикле
 
     public static Map<Integer, Integer> countNumbers(int[] arr) {
         Map<Integer, Integer> result = new HashMap<>();
 
         for (int num : arr) {
             if (result.containsKey(num)) {
-                result.put(num, result.get(num - 1));
+                result.put(num, result.get(num) + 1);
             } else {
 
                 result.put(num, 1);
@@ -607,7 +636,7 @@ public class Main {
         return result;
     }
 
-    //Map это интерфейс, HashMap один из классов который интерфейс имплементирует Ключей может быть сколько угодно важно чтобы не повторялись
+//Map это интерфейс, HashMap один из классов который интерфейс имплементирует Ключей может быть сколько угодно важно чтобы не повторялись
 
     public static Integer firstDuplicate(int[] arr) {
         Set<Integer> seen = new HashSet<>();
@@ -622,253 +651,216 @@ public class Main {
         return null;
     }
 
-    //HashSet это только ключи а значения null
-    {
-        // Пример использования Singleton
-        SomeDB.getInstance().doQuery(); // long, with connection init
-        SomeDB.getInstance(); // fast
-        SomeDB.getInstance(); // fast
-        SomeDB.getInstance(); // long - timeout connection
+//HashSet это только ключи а значения null
 
-        // Пример задачи разработчика
-        // 1. get user
-        // 2. change user
-        // 3. send to DB
+    public Input getUserByID(int id) {
+        int userId = id;
+        String name = "Vasily";
 
-        // от http-запроса данные от фронта
-        int userId = 1238;
-        String newName = "Oleg";
-
-        User User = UserFactory.getUserByID(userId);
-        String name = User.getName();
-
-        // 2. set and validate
-        User.setName(newName);
-
-        // 3. send to DB
-        IDB DB = DBFactory.getDBConnection();
-        DB.recordData("");
+        return new Input(userId, name);
     }
 
-}
+    // Singleton
+    static class SomeDB {
+        private static SomeDB instance;
 
-// Singleton
-static class SomeDB {
-    private static SomeDB instance;
-
-    private SomeDB() {
-        // connect
-    }
-
-    public static SomeDB getInstance() {
-        if (!(instance instanceof SomeDB)) {
-            instance = new SomeDB();
+        private SomeDB() {
+            // connect
         }
-        return instance;
+
+        public static SomeDB getInstance() {
+            if (instance == null) {
+                instance = new SomeDB();
+            }
+            return instance;
+        }
+
+        public void doQuery() {
+        }
     }
 
-    public void doQuery() {
-    }
-}
+    // Feature department
+    static class User {
+        int id;
+        String name;
 
-// Feature department
-static class User {
-    int id;
-    String name;
-
-    User(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        if (this.validateName(name)) {
+        User(int id, String name) {
+            this.id = id;
             this.name = name;
         }
-        throw new IllegalArgumentException("Bad name");
-    }
 
-    private boolean validateName(String name) {
-        if (name.isEmpty()) {
-            return false;
+        public String getName() {
+            return this.name;
         }
-        return true;
-    }
-}
 
-class UserFactory {
-    public static User getUserByID(int id) {
-        // поход в БД
-        // select id, name, <...> from User where User.id=#id
-        int userId = id;
-        String userName = "Vitalii";
+        public void setName(String name) {
+            if (this.validateName(name)) {
+                this.name = name;
+            } else {
+                throw new IllegalArgumentException("Bad name");
+            }
+        }
 
-        return new User(userId, userName);
-    }
-}
-
-// Infra department
-class DBFactory {
-    // читается из конфига
-    private static int IP = 23123123;
-    // private static String targetDB = "MySQL";
-    private static String targetDB = "PostgreSQL";
-
-    public static IDB getDBConnection() {
-        if (Objects.equals(targetDB, "PostgreSQL")) {
-            return new PostgreSQL(IP);
-        } else {
-            return new MySQL(IP);
+        private boolean validateName(String name) {
+            if (name.isEmpty()) {
+                return false;
+            }
+            return true;
         }
     }
-}
 
-static class MySQL implements IDB {
-    int connectionIP;
+    static class UserFactory {
+        public static User getUserByID(int id) {
+            // поход в БД
+            // select id, name, <...> from User where User.id=#id
+            int userId = id;
+            String userName = "Vitalii";
 
-    MySQL(int connectionIP) {
-        this.connectionIP = connectionIP;
+            return new User(userId, userName);
+        }
     }
 
-    public String getData(String query) {
-        // select id, name, <...> from User where User.id=#id
-        return "Vitalii";
+    // Infra department
+    static class DBFactory {
+        // читается из конфига
+        private static int IP = 23123123;
+        // private static String targetDB = "MySQL";
+        private static String targetDB = "PostgreSQL";
+
+        public static IDB getDBConnection() {
+            if (Objects.equals(targetDB, "PostgreSQL")) {
+                return new PostgreSQL(IP);
+            } else {
+                return new MySQL(IP);
+            }
+        }
     }
 
-    public void recordData(String query) {
-        // insert into <....>
+    static class MySQL implements IDB {
+        int connectionIP;
+
+        MySQL(int connectionIP) {
+            this.connectionIP = connectionIP;
+        }
+
+        public String getData(String query) {
+            // select id, name, <...> from User where User.id=#id
+            return "Vitalii";
+        }
+
+        public void recordData(String query) {
+            // insert into <....>
+        }
+
+        public void deleteData(String query) {
+            // delete <....>
+        }
+
+        public void somethingOnlyForMySQL() {
+
+        }
     }
 
-    public void deleteData(String query) {
-        // delete <....>
+    static class PostgreSQL implements IDB {
+        int connectionIP;
+
+        PostgreSQL(int connectionIP) {
+            this.connectionIP = connectionIP;
+            // create connection --> connect to DB
+        }
+
+        public String getData(String query) {
+            // select id, name, <...> from User where User.id=#id
+            return "Vitalii";
+        }
+
+        public void recordData(String query) {
+            // insert into <....>
+        }
+
+        public void deleteData(String query) {
+            // delete <....>
+        }
+
+        public void somethingOnlyForPostgreSQL() {
+
+        }
     }
 
-    public void somethingOnlyForMySQL() {
+    interface IDB {
+        String getData(String query);
 
-    }
-}
+        void recordData(String query);
 
-static class PostgreSQL implements IDB {
-    int connectionIP;
-
-    PostgreSQL(int connectionIP) {
-        this.connectionIP = connectionIP;
-        // create connection --> connect to DB
+        void deleteData(String query);
     }
 
-    public String getData(String query) {
-        // select id, name, <...> from User where User.id=#id
-        return "Vitalii";
-    }
+    static class Input {
+        int messageId;
+        String messagePayload;
 
-    public void recordData(String query) {
-        // insert into <....>
-    }
-
-    public void deleteData(String query) {
-        // delete <....>
-    }
-
-    public void somethingOnlyForPostgreSQL() {
-
-    }
-}
-
-interface IDB {
-    public String getData(String query);
-
-    public void recordData(String query);
-
-    public void deleteData(String query);
-}
-
-
-class Input {
-    int messageId;
-    String messagePayload;
-
-    Input(int messageId, String messagePayload) {
-        this.messageId = messageId;
-        this.messagePayload = messagePayload;
-    }
-
-    public String getMessagePayload() {
-        return this.messagePayload;
-    }
-
-
-    public void SetMessagePayload(String messagePayload) {
-        if (this.validateInput(messagePayload)) {
-
+        Input(int messageId, String messagePayload) {
+            this.messageId = messageId;
             this.messagePayload = messagePayload;
         }
-        throw new IllegalArgumentException("input is not correct");
+
+        public String getMessagePayload() {
+            return this.messagePayload;
+        }
+
+        public void SetMessagePayload(String messagePayload) {
+            if (this.validateInput(messagePayload)) {
+                this.messagePayload = messagePayload;
+            } else {
+                throw new IllegalArgumentException("input is not correct");
+            }
+        }
+
+        public boolean validateInput(String messagePayload) {
+            if (messagePayload.isEmpty()) {
+                return false;
+            } else return true;
+        }
     }
 
-    public boolean validateInput(String messagePayload) {
-        if (messagePayload.isEmpty()) {
-            return false;
-        } else return true;
+    interface FieldInputMethods {
+        String getInput(String input);
+
+        void editInput(String input);
+
+        void deleteInput(String query);
+    }
+
+    static class NewInputFactory {
+        public static Input getMessageById(int id) {
+
+            int messageId = id;
+            String messagePayload = "Vitalii";
+
+            return new Input(messageId, messagePayload);
+        }
+    }
+
+    static class InputFactory implements FieldInputMethods {
+
+        String input;
+
+        InputFactory(String input) {
+            this.input = input;
+        }
+
+        public String getInput(String input) {
+
+            return "client_message";
+        }
+
+        public void editInput(String input) {
+
+        }
+
+        public void deleteInput(String input) {
+
+        }
     }
 }
-
-public Input getUserByID(int id) {
-    int userId = id;
-    String name = "Vasily";
-
-    return new Input(userId, name);
-}
-
-interface fieldInputMethods {
-    public String getInput(String input);
-
-    public void editInput(String input);
-
-    public void deleteInput(String query);
-}
-
-class InputFactory implements fieldInputMethods {
-
-    String input;
-
-    InputFactory(String input) {
-        this.input = input;
-    }
-
-    public String getInput(String input) {
-
-        return "client_message";
-    }
-
-    public void editInput(String input) {
-
-    }
-
-    public void deleteInput(String input) {
-
-    }
-}
-
-void main() {
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
