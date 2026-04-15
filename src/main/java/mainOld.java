@@ -2,6 +2,7 @@ import java.util.*;
 import java.util.Objects;
 
 import static java.lang.Math.abs;
+import static org.hamcrest.Matchers.hasItems;
 
 public static void main(String[] args) {
     int[] arr = {1, 1, 2};
@@ -861,5 +862,152 @@ static class InputFactory implements FieldInputMethods {
 
     }
 
+    // Abstract methods
+
+    // не настоящий юзер
+    abstract class UserSimple {
+        int id;
+        String name;
+
+        UserSimple(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        abstract public void sendMessage(String message);
+
+        abstract public void getMessage(String message);
+    }
+
+    class CommonUser extends UserSimple {
+        int id;
+        String name;
+
+        CommonUser(int id, String name) {
+            super(id, name);
+        }
+
+        public void sendMessage(String message) {
+            System.out.println("Common User message: " + message);
+        }
+
+        @Override
+        public void getMessage(String message) {
+
+        }
+    }
+
+    class SuperAdminUser extends UserSimple {
+        int id;
+        String name;
+
+        SuperAdminUser(int id, String name) {
+            super(id, name);
+        }
+
+        public void sendMessage(String message) {
+            System.out.println("Admin User message: " + message);
+        }
+
+        @Override
+        public void getMessage(String message) {
+
+        }
+    }
+
+// Abstract methods
+
+    // Singleton
+    class SomeDB {
+        private static SomeDB instance;
+
+        private SomeDB() {
+            // connect
+        }
+
+
+        public void doQuery() {
+        }
+    }
+
+    // Feature department
+    static class User {
+        int id;
+        String name;
+
+        User(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public void setName(String name) {
+            if (this.validateName(name)) {
+                this.name = name;
+            } else {
+                throw new IllegalArgumentException("Bad name");
+            }
+        }
+
+        public void sendMessage(String message) {
+            System.out.println(message);
+        }
+
+        // инкапсуляция
+        protected boolean validateName(String name) {
+            if (name.isEmpty()) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    class AdminUser extends User {
+        int rights;
+
+        AdminUser(int id, String name, int rights) {
+            super(id, name);
+            this.rights = rights;
+        }
+
+        public void setRights(int newRights) {
+            this.rights = newRights;
+        }
+
+        @Override
+        protected boolean validateName(String name) {
+            boolean resultFromParentMethod = super.validateName(name);
+
+            if (!resultFromParentMethod) {
+                return false;
+            }
+
+            if (!name.toLowerCase().contains("admin")) {
+                return false;
+            }
+            return true;
+
+        }
+    }
+
+    class UserFactory {
+        public static User getUserByID(int id) {
+            int userId = id;
+            String userName = "Vitalii";
+
+            return new User(userId, userName);
+        }
+
+    }
+
+
 }
+
 
