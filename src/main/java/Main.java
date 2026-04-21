@@ -1,5 +1,11 @@
 import io.qameta.allure.util.ObjectUtils;
 
+class NoNodeIndexException extends Exception {
+    public NoNodeIndexException(String message) {
+        super(message);
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
         Node head = new Node(1);
@@ -9,11 +15,18 @@ public class Main {
         head.next = node2;
         node2.next = node3;
 
-        printHead(head);
-        System.out.println(numberOfNodes(head));
-        System.out.println(sumOfNodeValues(head));
-        System.out.println(valueOfLastNode(head));
-        System.out.println(checkListProperties(head));
+//        printHead(head);
+//        System.out.println(numberOfNodes(head));
+//        System.out.println(sumOfNodeValues(head));
+//        System.out.println(valueOfLastNode(head));
+//        System.out.println(checkListProperties(head));
+
+
+        try {
+            System.out.println(valueOfNode(head, 3));
+        } catch (NoNodeIndexException e) {
+            System.out.println("no such index");
+        }
 
 
     }
@@ -75,11 +88,75 @@ public class Main {
         return hasEven;
     }
 
+    public static int valueOfNode(Node head, int target) throws NoNodeIndexException {
+
+        int counter = 0;
+        while (head instanceof Node) {
+            if (counter == target) {
+                return head.value;
+            }
+            head = head.next;
+            counter++;
+
+        }
+        throw new NoNodeIndexException("No element with index = " + target);
+
+    }
+
+    public static int deletionOfNode(Node head, int target) throws NoNodeIndexException {
+
+        int counter = 0;
+        while (head instanceof Node) {
+            if (counter == target - 1) {
+                head.next = head.next.next;
+            }
+            head = head.next;
+            counter++;
+
+        }
+        throw new NoNodeIndexException("No element with index = " + target);
+
+    }
+
+    public static Node insertToTheList(Node head, int value, int position) throws NoNodeIndexException {
+
+        Node newNode = new Node(value);
+
+
+        if (position == 0) {
+            newNode.next = head;
+            return newNode;
+        }
+
+        if (head == null) {
+            throw new NoNodeIndexException("List is empty, cannot insert at position " + position);
+        }
+
+        Node current = head;
+        int counter = 0;
+
+        while (current != null && counter < position - 1) {
+            current = current.next;
+            counter++;
+        }
+
+        if (current == null) {
+            throw new NoNodeIndexException("No element with index = " + position);
+        }
+
+        newNode.next = current.next;
+        current.next = newNode;
+
+        return head;
+    }
+
+
 }
 
 class Node {
 
     Node next;
+    Node prev;
     int value;
 
     public Node(int value) {
