@@ -7,7 +7,7 @@ class NoNodeIndexException extends Exception {
 }
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoNodeIndexException {
         Node head = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(3);
@@ -20,7 +20,7 @@ public class Main {
 //        System.out.println(sumOfNodeValues(head));
 //        System.out.println(valueOfLastNode(head));
 //        System.out.println(checkListProperties(head));
-
+        System.out.println(insertToTheList(head,14,2));
 
         try {
             System.out.println(valueOfNode(head, 3));
