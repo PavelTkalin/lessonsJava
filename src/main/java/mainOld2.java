@@ -2,27 +2,23 @@ public class mainOld2 {
 
 
     public static void main(String[] args) {
-    String[] valuesOfStrings = {"A", "B", "C", "D", "E"};
-    MyLinkList<String> listOfStrings = new MyLinkList<>(valuesOfStrings);
+        String[] valuesOfStrings = {"A", "B", "C", "D", "E"};
+        MyLinkList<String> listOfStrings = new MyLinkList<>(valuesOfStrings);
         listOfStrings.print();
 
 //        listOfStrings.addToEnd("F");
 //        listOfStrings.print();
 
-        try
-
-    {
-        listOfStrings.removeFromEnd();
-    } catch(
-    MyLinkedListOutOfIndexException e)
-
-    {
-        //
-    }
+        try {
+            listOfStrings.removeFromEnd();
+        } catch (
+                MyLinkedListOutOfIndexException e) {
+            //
+        }
 
         listOfStrings.print();
 
-}
+    }
 }
 
 class MyLinkedListOutOfIndexException extends Exception {
@@ -93,6 +89,51 @@ class MyLinkList<T> {
         }
 
         ++this.size;
+    }
+
+    public void addToPosition(T value, int position) throws MyLinkedListOutOfIndexException {
+
+        Node<T> newNode = new Node<>(value);
+
+
+        if (position == 0) {
+            newNode.next = this.head;
+
+
+            if (this.head != null) {
+
+                this.head.prev = newNode;
+            }
+
+            this.head = newNode;
+
+            if (this.size == 0) {
+                this.tail = newNode;
+            }
+            this.size++;
+            return;
+
+        }
+
+        if (position == this.size) {
+            addToEnd(value);
+            return;
+        }
+
+        Node<T> current = this.head;
+        for (int i = 0; i < position; i++) {
+            current = current.next;
+            Node<T> previous = current.prev;
+
+            previous.next = newNode;
+            newNode.prev = previous;
+
+            newNode.next = current;
+            current.prev = newNode;
+
+            this.size++;
+        }
+
     }
 
     public void print() {
