@@ -2,77 +2,128 @@ public class mainOld2 {
 
 
     public static void main(String[] args) {
+    String[] valuesOfStrings = {"A", "B", "C", "D", "E"};
+    MyLinkList<String> listOfStrings = new MyLinkList<>(valuesOfStrings);
+        listOfStrings.print();
 
-        UsaUser userAmerica = new UsaUser("Gena", 20);
-        System.out.println(userAmerica.name);
-        System.out.println(userAmerica.age);
-        System.out.println(userAmerica.isAdult());
-        userAmerica.sayMyName(userAmerica.name);
+//        listOfStrings.addToEnd("F");
+//        listOfStrings.print();
 
-        RuUser userRussia = new RuUser("Vassily", 17);
-        System.out.println(userRussia.name);
-        System.out.println(userRussia.age);
-        System.out.println(userRussia.isAdult());
-        userRussia.sayMyName(userRussia.name);
+        try
 
+    {
+        listOfStrings.removeFromEnd();
+    } catch(
+    MyLinkedListOutOfIndexException e)
 
+    {
+        //
     }
 
+        listOfStrings.print();
 
 }
-
-abstract class User {
-
-    int ageOfAdult;
-    int age;
-    String name;
-
-    public User(String name, int age) {
-
-        this.age = age;
-        this.name = name;
-    }
-
-    public Boolean isAdult() {
-
-
-        return this.age >= ageOfAdult;
-    }
-
-
 }
 
-class UsaUser extends User implements vocal {
-
-    int ageOfAdult = 21;
-
-    public UsaUser(String name, int age) {
-        super(name, age);
-    }
-
-    @Override
-    public void sayMyName(String name) {
-        System.out.println(name);
+class MyLinkedListOutOfIndexException extends Exception {
+    public MyLinkedListOutOfIndexException(String message) {
+        super(message);
     }
 }
 
-class RuUser extends User implements vocal {
+class MyLinkList<T> {
+    private Node<T> head;
+    private Node<T> tail;
+    private int size = 0;
 
-    int ageOfAdult = 18;
-
-    public RuUser(String name, int age) {
-        super(name, age);
+    public MyLinkList(T[] values) {
+        for (int i = 0; i < values.length; ++i) {
+            this.addToEnd(values[i]);
+        }
     }
 
-    @Override
-    public void sayMyName(String name) {
-        System.out.println(name);
+    public void removeFromEnd() throws MyLinkedListOutOfIndexException {
+        if (this.head == null) {
+            throw new MyLinkedListOutOfIndexException("Cannot remove last element - list is empty");
+        }
+
+        if (this.size == 1) {
+            this.head = null;
+            this.tail = null;
+            this.size = 0;
+            return;
+        }
+
+        // 1. [1] <-> [2] <-> [3] (tail) <-> null
+        // 1. [1] <-> [2] (tail) <-> [3] <-> null
+        // 1. [1] <-> [2] (tail) -> null
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+        --this.size;
+    }
+
+    public void addToEnd(T value) {
+        // на вход - 3 / "hello"
+        // делаем из этого объект класса Node - [3] / ["hello"]
+        Node<T> newNode = new Node<>(value);
+
+        // [1] <-> [2] <-> Null ( <-> [3] )
+        // IF: add to existing node
+        if (this.head != null) {
+            // 0. [3]
+            // 1. [1] <-> [2] (tail) <-> null
+            // 2. [1] <-> [2] (tail) -> (next) [3]
+            // 3. [1] <-> [2] (tail) <- (prev) [3]
+            // result 2 and 3: 4. [1] <-> [2] (tail) <-> [3]
+            // 5. [1] <-> [2] <-> [3] (tail)
+
+            // add newNode to the end of the chain
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+
+            // call newNode as a tail
+            this.tail = newNode;
+        }
+
+        // ( head -> [3] )
+        // ELSE (this.head == null): create a head, add a node
+        else {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+
+        ++this.size;
+    }
+
+    public void print() {
+        Node<T> currentNode = this.head;
+
+        while (currentNode != null) {
+            System.out.print("[" + currentNode.value + "] <-> ");
+            currentNode = currentNode.next;
+        }
+
+        System.out.print("null\n");
     }
 }
 
-interface vocal {
+// Null <- [1] (head) <-> [2] <-> [3] (tail) -> Null
+class Node<T> {
+    public T value;
+    public Node next;
+    public Node prev;
 
-    public void sayMyName(String name);
+    public Node(T value) {
+        this.value = value;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+
+    public void setPrev(Node next) {
+        this.prev = next;
+    }
 
 
 }
