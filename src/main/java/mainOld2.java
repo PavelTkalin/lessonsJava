@@ -136,6 +136,47 @@ class MyLinkList<T> {
 
     }
 
+    public void removeFromPosition(int position) throws MyLinkedListOutOfIndexException {
+        if (position < 0 || position >= this.size) {
+            throw new MyLinkedListOutOfIndexException("Invalid position");
+        }
+
+
+        if (position == 0) {
+            this.head = this.head.next;
+
+            if (this.head != null) {
+                this.head.prev = null;
+            } else {
+                this.tail = null;
+            }
+
+            this.size--;
+            return;
+        }
+
+
+        if (position == this.size - 1) {
+            removeFromEnd();
+            return;
+        }
+
+
+        Node<T> current = this.head;
+
+        for (int i = 0; i < position; i++) {
+            current = current.next;
+        }
+
+        Node<T> previous = current.prev;
+        Node<T> next = current.next;
+
+        previous.next = next;
+        next.prev = previous;
+
+        this.size--;
+    }
+
     public void print() {
         Node<T> currentNode = this.head;
 
