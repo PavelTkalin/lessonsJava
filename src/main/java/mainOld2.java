@@ -1,13 +1,16 @@
 public class mainOld2 {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyLinkedListOutOfIndexException {
         String[] valuesOfStrings = {"A", "B", "C", "D", "E"};
         MyLinkList<String> listOfStrings = new MyLinkList<>(valuesOfStrings);
         listOfStrings.print();
 
 //        listOfStrings.addToEnd("F");
 //        listOfStrings.print();
+
+        listOfStrings.addToPosition("x",2);
+        listOfStrings.removeFromPosition(2);
 
         try {
             listOfStrings.removeFromEnd();
@@ -16,7 +19,7 @@ public class mainOld2 {
             //
         }
 
-        listOfStrings.print();
+  listOfStrings.print();
 
     }
 }
