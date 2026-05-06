@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Objects;
 
@@ -1007,6 +1008,69 @@ static class InputFactory implements FieldInputMethods {
 
     }
 
+    public static int secondMaxValue(int[] nums) {
+        if (nums.length < 2) {
+            throw new RuntimeException("");
+        }
+
+
+        int MaxValue;
+        int secondMaxValue;
+        if (nums[0] >= nums[1]) {
+            MaxValue = nums[0];
+            secondMaxValue = nums[1];
+        } else {
+            MaxValue = nums[1];
+            secondMaxValue = nums[0];
+        }
+
+//        int[] nums1 = {1,3,2};
+//         MaxValue=3;
+//         secondMaxValue = 1;
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] > MaxValue) {
+
+                secondMaxValue = MaxValue;
+                MaxValue = nums[i];
+            } else if (nums[i] > secondMaxValue) {
+                secondMaxValue = nums[i];
+            }
+
+        }
+        return secondMaxValue;
+    }
+
+    public boolean stringLogicFilter(String string) {
+        boolean stringPass = false;
+        ArrayList symbols = new ArrayList();
+
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == '('
+                    || string.charAt(i) == '{'
+                    || string.charAt(i) == '[') {
+                symbols.add(string.charAt(i));
+            } else if (string.charAt(i) == ')'
+                    || string.charAt(i) == '}'
+                    || string.charAt(i) == ']') {
+                char lastChar = (char) symbols.removeLast();
+                if (string.charAt(i) == '(') {
+                    lastChar = ')';
+
+                }
+                if (string.charAt(i) == '[') {
+                    lastChar = ']';
+                }
+                if (string.charAt(i) == '{') {
+                    lastChar = '}';
+                }
+                stringPass = true;
+            }
+
+
+        }
+        return stringPass;
+
+    }
 
 }
 
