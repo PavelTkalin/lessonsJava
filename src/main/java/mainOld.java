@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Objects;
 
@@ -31,7 +30,14 @@ public static void main(String[] args) {
     };
 
 
-//        printMatrix(matrix);
+//    distanceBetweenSameSymbols("abcda");
+
+
+//    printSymbolsFromString("abcda");
+//    printSymbolsFromStringCalculation("abcdabbcccc");
+//    prinMostFrequentSymbol("abcdabbcccc");
+    System.out.println(correctSentence("What the hell are you doing mr fuck"));
+
 
 //        System.out.println(weHaveSomeNumber(arr, 3));
 //        System.out.println(evenFind(arr));
@@ -62,6 +68,7 @@ public static void main(String[] args) {
 //        System.out.println(ifNegativeInMatrixExist(diagonal));
 //        System.out.println(ifEvenNumbersPresentInMatrix(diagonal));
 //        System.out.println(matrixSymmetry(diagonal));
+
 
     // Пример использования Singleton
     SomeDB.getInstance().doQuery(); // long, with connection init
@@ -122,6 +129,147 @@ public static List<Integer> evenFind(int[] arr) {
     return evenNumbers;
 
 }
+
+public static int distanceBetweenSameSymbols(String string) {
+    int distance = -1;
+    HashMap<Character, Integer> mapOfFirst = new HashMap<>();
+
+    //a,b,c,d,a
+    //{a:0,
+    // b:1,
+    // c:2,
+    // d:3,}
+
+    for (int i = 0; i < string.length(); i++) {
+
+        char currentChar = string.charAt(i);
+        if (mapOfFirst.containsKey(currentChar)) {
+
+            int currentDistance = i - mapOfFirst.get(currentChar);
+            if (currentDistance > distance) {
+                distance = currentDistance;
+            }
+
+        } else {
+            mapOfFirst.put(currentChar, i);
+        }
+
+    }
+
+    System.out.println(distance);
+    return distance;
+}
+
+// получаем строчку, запоминаем все позиции символов и возрващаем тот который встречался чаще всего. если два символа одинаковое количество раз то вернем тот который встречается раньше
+
+public static char mostFrequentSymbol(String string) {
+
+    HashMap<Character, ArrayList> tableOfChars = new HashMap<>();
+    char frequentSymbol = 0;
+
+    for (int i = 0; i < string.length(); i++) {
+        char currentSymbol = string.charAt(i);
+        if (tableOfChars.containsKey(currentSymbol)) {
+
+        }
+    }
+
+    return frequentSymbol;
+}
+
+//на вход подаваться строка а дальше задача будет напечатать каждый символ из кажлой строки. Симмол - встречаю первый раз, либо не первый раз. Если пустая строка то ниего не пишем
+
+public static void printSymbolsFromString(String string) {
+
+    HashMap<Character, Boolean> symbolsFrequence = new HashMap<>();
+
+    for (int i = 0; i < string.length(); i++) {
+        char currentSymbol = string.charAt(i);
+        if (symbolsFrequence.containsKey(currentSymbol)) {
+            System.out.println("символ " + currentSymbol + " встречаю в не первый раз");
+        } else {
+            System.out.println("символ " + currentSymbol + " встречаю в первый раз");
+            symbolsFrequence.put(currentSymbol, true);
+        }
+    }
+}
+
+public static void printSymbolsFromStringCalculation(String string) {
+
+    HashMap<Character, Integer> symbolsFrequence = new HashMap<>();
+
+    for (int i = 0; i < string.length(); i++) {
+        char currentSymbol = string.charAt(i);
+        if (symbolsFrequence.containsKey(currentSymbol)) {
+            int symbolsFrequenceResutlt = symbolsFrequence.get(currentSymbol) + 1;
+            symbolsFrequence.put(currentSymbol, symbolsFrequenceResutlt);
+            if (symbolsFrequenceResutlt < 3) {
+                System.out.println("символ " + currentSymbol + " встречается меньше трех раз");
+            } else if (symbolsFrequenceResutlt > 3) {
+                System.out.println("символ " + currentSymbol + " встречается больше трех раз");
+            } else {
+                System.out.println("символ " + currentSymbol + " встречается три раза");
+            }
+
+        } else {
+            System.out.println("символ " + currentSymbol + " встречаю в первый раз");
+            symbolsFrequence.put(currentSymbol, 1);
+        }
+    }
+}
+
+public static void prinMostFrequentSymbol(String string) {
+
+    HashMap<Character, Integer> symbolsFrequence = new HashMap<>();
+
+    for (int i = 0; i < string.length(); i++) {
+
+        char currentSymbol = string.charAt(i);
+        if (symbolsFrequence.containsKey(currentSymbol)) {
+            int symbolsFrequenceResult = symbolsFrequence.get(currentSymbol) + 1;
+            symbolsFrequence.put(currentSymbol, symbolsFrequenceResult);
+
+        } else {
+            symbolsFrequence.put(currentSymbol, 1);
+        }
+
+
+    }
+
+    char keyMax = ' ';
+    int valueMax = 0;
+    for (char key : symbolsFrequence.keySet()) {
+        int symbNumber = symbolsFrequence.get(key);
+        if (symbNumber > valueMax) {
+            valueMax = symbNumber;
+            keyMax = key;
+        }
+    }
+
+    System.out.println(keyMax + " встречается " + valueMax + " раз");
+}
+
+public static String correctSentence(String string) {
+    String[] arrayOfWords = string.split(" ");
+    HashMap<String, String> curseWords = new HashMap<>();
+    curseWords.put("hell", "h*ll");
+    curseWords.put("fuck", "f*ck");
+
+    for (int i = 0; i < arrayOfWords.length; i++) {
+        if (arrayOfWords[i].equals("hell") || arrayOfWords[i].equals("fuck")) {
+            arrayOfWords[i] = curseWords.get(arrayOfWords[i]);
+        }
+
+    }
+
+    return String.join(" ", arrayOfWords);
+}
+
+
+//на вход строка, последовательно смотрим каждое слово. если слово соответсвует плохому то заменяем на звездочку" Fuck, hell.
+
+
+// строку получаем и печатаем самый часто встречающийся символ
 
 
 public static boolean arrayHelper(int[] arr1, int parameter) {
@@ -1071,6 +1219,10 @@ static class InputFactory implements FieldInputMethods {
         return stringPass;
 
     }
+
+
+    //на вход приходит строка символов, найти расстояние самое большое между двумя однинаковыми символами. В случае неуспеха мы возвращаем минус 1
+
 
 }
 
